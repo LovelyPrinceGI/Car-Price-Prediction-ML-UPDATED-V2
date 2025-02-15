@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/Legion 5 Pro/OneDrive/Documents/Car price assignment/development_files/mlruns/394944342599273086/4d6596e75e8f499787b82fb4beb7b417/artifacts
+end_time: 1739447721053
+entry_point_name: ''
+experiment_id: '394944342599273086'
+lifecycle_stage: active
+run_id: 4d6596e75e8f499787b82fb4beb7b417
+run_name: A2-LinearRegression Training
+run_uuid: 4d6596e75e8f499787b82fb4beb7b417
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739447689133
+status: 3
+tags: []
+user_id: Legion 5 Pro

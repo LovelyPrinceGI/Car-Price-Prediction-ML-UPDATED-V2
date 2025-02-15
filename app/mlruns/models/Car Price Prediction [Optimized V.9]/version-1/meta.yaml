@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1739457525077
+current_stage: None
+description: ''
+last_updated_timestamp: 1739457525077
+name: Car Price Prediction [Optimized V.9]
+run_id: 99f589b94e454be78052a05c772a76e4
+run_link: ''
+source: file:///c:/Users/Legion 5 Pro/OneDrive/Documents/Car price assignment/development_files/mlruns/394944342599273086/99f589b94e454be78052a05c772a76e4/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///c:/Users/Legion 5 Pro/OneDrive/Documents/Car price assignment/development_files/mlruns/394944342599273086/99f589b94e454be78052a05c772a76e4/artifacts/model
+user_id: null
+version: 1
