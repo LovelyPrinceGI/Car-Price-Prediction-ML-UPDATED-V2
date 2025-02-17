@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+</head>
+<body>
+    <h1>Car Price Prediction</h1>
+    <p>Welcome to the Car Price Prediction tool. Please follow the instructions below:</p>
+    <ol>
+        <li>Enter the required details in the form below, including Max Power, Year, Kilometers Driven, Fuel Efficiency, and Brand Region.</li>
+        <li>Ensure that all numerical values (e.g., Max Power and Fuel Efficiency) are precise and entered correctly.</li>
+        <li>Click the "Predict Price" button to submit the form.</li>
+        <li>The predicted price of the car will be displayed below the form.</li>
+    </ol>
+    <form action="/predict/" method="post">
+        <label for="max_power">Max Power:</label>
+        <input type="number" id="max_power" name="max_power" step="0.01" required><br><br>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required><br><br>
+
+        <label for="km_driven">Km_driven:</label>
+        <input type="number" id="km_driven" name="km_driven" required><br><br>
+        
+        <label for="fuel_eff">Fuel Efficiency:</label>
+        <input type="number" id="fuel_eff" name="fuel_eff" step="0.01" required><br><br>
+        
+
+        
+        <label for="brand_region">Brand Region:</label>
+        <input type="text" id="brand_region" name="brand_region" required><br><br>
+        
+        <button type="submit">Predict Price</button>
+    </form>
+    {% if predicted_price is not none %}
+        <h2>Prediction Result</h2>
+        <p><strong>Predicted Price:</strong> {{ predicted_price | round(2)}}</p>
+        <h3>Vehicle Specifications:</h3>
+        <ul>
+            <li><strong>Max Power:</strong> {{ vehicle_specs['Max Power'] }}</li>
+            <li><strong>Year:</strong> {{ vehicle_specs['Year'] }}</li>
+            <li><strong>Kilometers Driven:</strong> {{ vehicle_specs['Km Driven'] }}</li>
+            <li><strong>Fuel Efficiency:</strong> {{ vehicle_specs['Fuel Efficiency'] }}</li>
+            <li><strong>Brand Region:</strong> {{ vehicle_specs['Brand Region'] }}</li>
+        </ul>
+    {% endif %}
+</body>
+</html>

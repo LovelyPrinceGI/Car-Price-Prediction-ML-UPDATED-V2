@@ -4,7 +4,7 @@ WORKDIR /root/code
 
 RUN pip3 install fastapi 
 RUN pip3 install uvicorn
-RUN pip3 install scikit-learn
+RUN pip3 install scikit-learn==1.3.2
 RUN pip3 install ipykernel
 RUN pip3 install matplotlib
 RUN pip3 install seaborn
@@ -14,7 +14,9 @@ RUN pip3 install pandas
 RUN pip3 install numpy
 RUN pip3 install Jinja2
 RUN pip3 install python-multipart
+# RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip3 install mlflow 
 
 COPY ./app /root/code
 
-CMD tail -f /dev/null
+# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
