@@ -31,3 +31,8 @@ This repository contains an improved Car Price Prediction web application built 
 - 📌 Dockerfile → Docker setup for containerizing the application.
 - 📌 docker-compose.yaml → Configuration for deploying via Docker Compose.
 - 📌 .gitignore → Excluded files from version control.
+## **Result of tests on $MSE$ and $R^2$ for top 10 best models via MLFlow below:**
+
+![alt text](app/test_results/test_mse.png)
+
+![alt text](app/test_results/test_r2.png)

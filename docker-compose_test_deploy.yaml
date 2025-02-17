@@ -6,7 +6,7 @@ services:
     # docker compose -f docker-compose_test_deploy.yaml up
     command: python3 main.py
     # The image I upload to my docker hub
-    image: lovelyprince/ait-ml-fastapi:2025
+    image: lovelyprince/ait-ml-fastapi:2025v1
     # tty: true
     # For MAC M1 user
     build: 
@@ -17,7 +17,7 @@ services:
     # uvicorn main:app --host 0.0.0.0 --port 8000
     environment:
       - HOST=0.0.0.0
-      - PORT=8000
+      - PORT=80
     # This is important for asking Traefik to use your container.
     # labels:
     #   # Allow Traefik to talk with your service
@@ -41,7 +41,7 @@ services:
       - ./.vscode-server:/root/.vscode-server
     # Expose necessary ports
     ports:
-      - 9001:8000
+      - 9001:80
 
 # Keep it like this too.
 # networks:

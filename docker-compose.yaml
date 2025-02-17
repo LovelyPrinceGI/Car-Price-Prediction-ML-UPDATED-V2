@@ -6,7 +6,7 @@ services:
     # docker compose -f docker-compose.yaml up
     command: python3 main.py
     # The image I upload to my docker hub
-    image: car-price-prediction-updated:latest
+    image: lovelyprince/ait-ml-fastapi:2025
     # For MAC M1 user
     platform: linux/x86_64
     # Set environment variables
@@ -21,7 +21,7 @@ services:
       - traefik.http.services.car-price-prediction-st124876.loadbalancer.server.port=8000
       # This configures your domain name. By default, your subdomain is <service_name>-<folder_name>
       # If you want to change the subdomain name, uncomment and modify the below configuration
-      - traefik.http.routers.car-price-prediction-st124876.rule=Host(`st124876.ml-brain.cs.ait.ac.th`)
+      - traefik.http.routers.car-price-prediction-st124876.rule=Host(`st124876.ml.brain.cs.ait.ac.th`)
       # Enable SSL
       - traefik.http.routers.car-price-prediction-st124876.tls=true
       - traefik.http.routers.car-price-prediction-st124876.tls.certresolver=production
