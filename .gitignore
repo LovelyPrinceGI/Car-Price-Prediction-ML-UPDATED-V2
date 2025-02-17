@@ -3,3 +3,7 @@ __pycache__
 *.csv
 Beta
 mlruns/
+index_backup.html
+main_backup.py
+main_backup2.py
+main.py_backup3.py
