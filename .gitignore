@@ -4,6 +4,7 @@ __pycache__
 Beta
 mlruns/
 index_backup.html
+mlartifacts/
 main_backup.py
 main_backup2.py
 main.py_backup3.py
