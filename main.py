@@ -70,28 +70,28 @@ def predict_car_price_old(
 ):
     try:
         brand_encoder = pickle.load(open("preprocess_v2/brandre_encoder_v2.prep", "rb"))
-        scaler_v2_updated_updated = pickle.load(open("preprocess_v2/scaler_v2_updated.prep", "rb"))
+        scaler_v2_updated = pickle.load(open("preprocess_v2/scaler_v2_updated.prep", "rb"))
 
         # Process input and predict
         brand_region_encoded = brand_encoder.transform([[brand_region]])
         brand_region_array = brand_region_encoded[0]
 
         # Combine all inputs
-        features = np.array([[max_power, year, km_driven, fuel_eff] + list(brand_region_array)])
+        numeric_features = np.array([[max_power, year, km_driven, fuel_eff]])  # shape (1, 4)
 
         # Apply Log transform
-        features[0][0] = np.log1p(features[0][0])  # max_power
-        features[0][2] = np.log1p(features[0][2])  # km_driven
+        numeric_features[0][0] = np.log1p(numeric_features[0][0])  # max_power
+        numeric_features[0][2] = np.log1p(numeric_features[0][2])  # km_driven
 
         # Power transform fuel_eff
         fuel_eff_transformer = pickle.load(open("preprocess_v2/fuel_eff_transformer.prep", "rb"))
-        features[0][3] = fuel_eff_transformer.transform([[features[0][3]]])[0][0]
+        numeric_features[0][3] = fuel_eff_transformer.transform([[numeric_features[0][3]]])[0][0]
 
         # Normalize using scaler
-        scaled_features = scaler.transform(features)[0]  # shape: (4,)
+        scaled_numeric_features = scaler_v2_updated.transform(numeric_features)[0]  # shape: (4,)
 
         # Concatenate one-hot encoded brand_region
-        final_features = np.hstack([scaled_features, brand_region_array])
+        final_features = np.hstack([scaled_numeric_features, brand_region_array])
 
         # Make a prediction
         predicted_category = model.predict(final_features)[0]
