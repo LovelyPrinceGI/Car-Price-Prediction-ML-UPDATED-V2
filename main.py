@@ -105,7 +105,18 @@ def predict_car_price_old(
             "Brand Region": brand_region
         }
 
-        return templates.TemplateResponse("index.html", {"request": request, "predicted_category": predicted_category, "vehicle_specs": vehicle_specs})
+        return templates.TemplateResponse("index.html", {
+            "request": request,
+            "predicted_category": predicted_category,
+            "vehicle_specs": {
+                "max_power": max_power,
+                "year": year,
+                "km_driven": km_driven,
+                "fuel_eff": fuel_eff,
+                "brand_region": brand_region
+            }
+        })
+
 
     except Exception as e:
         print(f"[ERROR] Prediction failed: {e}")

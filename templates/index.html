@@ -51,17 +51,13 @@
             <button type="submit">Predict Price Category</button>
         </form>
 
-        {% if predicted_category is not none %}
-        <h2>Prediction Result</h2>
-        <p><strong>Predicted Price Category:</strong> {{ predicted_category }}</p>
-        <h3>Vehicle Specifications:</h3>
-        <ul>
-            <li><strong>Max Power:</strong> {{ vehicle_specs['Max Power'] }}</li>
-            <li><strong>Year:</strong> {{ vehicle_specs['Year'] }}</li>
-            <li><strong>Kilometers Driven:</strong> {{ vehicle_specs['Km Driven'] }}</li>
-            <li><strong>Fuel Efficiency:</strong> {{ vehicle_specs['Fuel Efficiency'] }}</li>
-            <li><strong>Brand Region:</strong> {{ vehicle_specs['Brand Region'] }}</li>
-        </ul>
+        {% if predicted_category %}
+            <h3>🔮 Predicted Price Category: {{ predicted_category }}</h3>
+            <p><strong>Max Power:</strong> {{ vehicle_specs.max_power }}</p>
+            <p><strong>Year:</strong> {{ vehicle_specs.year }}</p>
+            <p><strong>Km Driven:</strong> {{ vehicle_specs.km_driven }}</p>
+            <p><strong>Fuel Efficiency:</strong> {{ vehicle_specs.fuel_eff }}</p>
+            <p><strong>Brand Region:</strong> {{ vehicle_specs.brand_region }}</p>
         {% endif %}
     </main>
 
