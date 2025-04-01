@@ -38,8 +38,8 @@ model_uri = "models:/st124876-a3-model/1"
 model = mlflow.pyfunc.load_model(model_uri)
 
 # Load preprocessors
-BRAND_ENCODER_PATH = os.path.join("source_code/preprocess_v2", "brandre_encoder_v2.prep")
-SCALER_PATH = os.path.join("source_code/preprocess_v2", "scaler_v2_updated.prep")
+BRAND_ENCODER_PATH = os.path.join("preprocess_v2", "brandre_encoder_v2.prep")
+SCALER_PATH = os.path.join("preprocess_v2", "scaler_v2_updated.prep")
 
 
 brand_encoder = pickle.load(open(BRAND_ENCODER_PATH, "rb"))
@@ -84,7 +84,7 @@ def predict_car_price_old(
         features[0][2] = np.log1p(features[0][2])  # km_driven
 
         # Power transform fuel_eff
-        fuel_eff_transformer = pickle.load(open("source_code/preprocess_v2/fuel_eff_transformer.prep", "rb"))
+        fuel_eff_transformer = pickle.load(open("preprocess_v2/fuel_eff_transformer.prep", "rb"))
         features[0][3] = fuel_eff_transformer.transform([[features[0][3]]])[0][0]
 
         # Normalize using scaler
