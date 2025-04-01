@@ -6,6 +6,7 @@ services:
     # docker compose -f docker-compose.yaml up
     command: python3 main.py
     tty: true
+
     # The image I upload to my docker hub
     image: lovelyprince/ait-ml-fastapi:2025_a3_1.0
     # For MAC M1 user
@@ -43,6 +44,8 @@ networks:
   traefik_default:
     external: true
 
+
 # This dastically improve performance
 volumes:
   vscode-server:
+

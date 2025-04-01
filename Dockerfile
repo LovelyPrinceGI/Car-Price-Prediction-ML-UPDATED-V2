@@ -17,11 +17,14 @@ RUN pip3 install python-multipart
 # RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 RUN pip3 install mlflow 
 
+
 # Testing Modules
 RUN pip3 install fastapi[testing]
 RUN pip3 install pytest
 RUN pip3 install pytest-depends
 
 COPY . /root/code/app
+
+
 
 # CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

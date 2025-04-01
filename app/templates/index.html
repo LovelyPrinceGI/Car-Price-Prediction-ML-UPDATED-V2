@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Car Price Prediction</h1>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="setModel('custom_logistic_regression')">Use Model</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <p>Welcome to the Car Price Prediction tool. Please follow the instructions below:</p>
+        <ol>
+            <li>Enter the required details in the form below, including Max Power, Year, Kilometers Driven, Fuel Efficiency, and Brand Region.</li>
+            <li>Ensure that all numerical values (e.g., Max Power and Fuel Efficiency) are precise and entered correctly.</li>
+            <li>Click the "Predict Price Category" button to submit the form.</li>
+            <li>The Predicted Price Category of the car will be displayed below the form.</li>
+            <li><strong>Optional:</strong> Wait a few seconds for the output to appear.</li>
+        </ol>
+        <p id="model-description">Currently using: <span id="selected-model">Custom Logistic Regression Model</span></p>
+        
+        <form action="/predict/custom_logistic_regression" method="post" id="prediction-form">
+            <label for="max_power">Max Power:</label>
+            <input type="number" id="max_power" name="max_power" step="0.01" required><br><br>
+
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" required><br><br>
+
+            <label for="km_driven">Km Driven:</label>
+            <input type="number" id="km_driven" name="km_driven" required><br><br>
+            
+            <label for="fuel_eff">Fuel Efficiency:</label>
+            <input type="number" id="fuel_eff" name="fuel_eff" step="0.01" required><br><br>
+            
+            <label for="brand_region">Brand Region:</label>
+            <input type="text" id="brand_region" name="brand_region" required><br><br>
+            
+            <button type="submit">Predict Price Category</button>
+        </form>
+
+        {% if predicted_category is not none %}
+        <h2>Prediction Result</h2>
+        <p><strong>Predicted Price Category:</strong> {{ predicted_category }}</p>
+        <h3>Vehicle Specifications:</h3>
+        <ul>
+            <li><strong>Max Power:</strong> {{ vehicle_specs['Max Power'] }}</li>
+            <li><strong>Year:</strong> {{ vehicle_specs['Year'] }}</li>
+            <li><strong>Kilometers Driven:</strong> {{ vehicle_specs['Km Driven'] }}</li>
+            <li><strong>Fuel Efficiency:</strong> {{ vehicle_specs['Fuel Efficiency'] }}</li>
+            <li><strong>Brand Region:</strong> {{ vehicle_specs['Brand Region'] }}</li>
+        </ul>
+        {% endif %}
+    </main>
+
+    <script>
+        function setModel(model) {
+            document.getElementById('prediction-form').action = `/predict/${model}`;
+            document.getElementById('selected-model').innerText = 'Custom Logistic Regression Model';
+            alert('You are using the Custom Logistic Regression Model for classification.');
+        }
+    </script>
+</body>
+</html>
