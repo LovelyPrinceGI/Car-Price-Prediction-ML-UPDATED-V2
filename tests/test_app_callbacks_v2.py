@@ -13,7 +13,7 @@ from my_model.my_model import MyLogisticRegression  # <-- แก้ตรงน�
 
 # ✅ MLflow model แยกตัวแปรต่างหาก
 mlflow.set_tracking_uri("https://admin:password@mlflow.ml.brain.cs.ait.ac.th")
-model_uri = "models:/st124876-a3-model/3"
+model_uri = "models:/st124876-a3-model/4"
 mlflow_model = mlflow.pyfunc.load_model(model_uri)  # อย่าใช้ชื่อว่า model ซ้ำ!
 
 # ========== Test for Your MyLogisticRegression Model ==========

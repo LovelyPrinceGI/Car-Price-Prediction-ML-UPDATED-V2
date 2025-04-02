@@ -16,3 +16,7 @@ A3_Car_Price_Prediction_UPDATED_V4.ipynb
 A3_Car_Price_Prediction_UPDATED_V5.ipynb
 A3_Car_Price_Prediction_UPDATED_V9.ipynb
 best_models.svg/
+.vscode-server/
+local_model/
+.pytest_cache/
+mlflow.db

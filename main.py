@@ -34,7 +34,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Load the model from MLflow
 mlflow.set_tracking_uri("https://admin:password@mlflow.ml.brain.cs.ait.ac.th")
-model_uri = "models:/st124876-a3-model/1"
+model_uri = "models:/st124876-a3-model/4"
 model = mlflow.pyfunc.load_model(model_uri)
 
 # Load preprocessors
@@ -69,6 +69,7 @@ def predict_car_price_old(
     brand_region: str = Form(...)
 ):
     try:
+
         brand_encoder = pickle.load(open("preprocess_v2/brandre_encoder_v2.prep", "rb"))
         scaler_v2_updated = pickle.load(open("preprocess_v2/scaler_v2_updated.prep", "rb"))
 
@@ -91,10 +92,12 @@ def predict_car_price_old(
         scaled_numeric_features = scaler_v2_updated.transform(numeric_features)[0]  # shape: (4,)
 
         # Concatenate one-hot encoded brand_region
-        final_features = np.hstack([scaled_numeric_features, brand_region_array])
+        final_features = np.hstack([scaled_numeric_features, brand_region_array]).reshape(1,-1)
+        print(final_features)
+
 
         # Make a prediction
-        predicted_category = model.predict(final_features)[0]
+        predicted_category = model.predict(final_features)
         # predicted_category = np.exp(predicted_category)
 
         vehicle_specs = {
@@ -123,4 +126,4 @@ def predict_car_price_old(
         raise HTTPException(status_code=400, detail=f"Error in prediction: {e}")
     
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=80, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=9001, reload=True)
