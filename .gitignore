@@ -20,3 +20,4 @@ best_models.svg/
 local_model/
 .pytest_cache/
 mlflow.db
+cida_action.yml
