@@ -28,9 +28,11 @@ jobs:
       - name: Compose up
         run: docker compose up -d
 
-      # Debug
-      - name: Show container logs (FastAPI debug)
+      # Debu
+      - name: Show FastAPI crash logs
         run: docker compose logs car-price-prediction || true
+      - name: Try to run bash in container to explore
+        run: docker compose exec car-price-prediction bash -c "ls -l /root/code && cat /root/code/app/main.py" || true
       - name: Check if pytest exists
         run: docker compose exec car-price-prediction which pytest
       
