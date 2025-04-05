@@ -40,7 +40,7 @@ services:
 
 # Keep it like this too.
 networks:
-  default:
+  traefik_default:
     name: traefik_default
 
 
