@@ -41,8 +41,7 @@ services:
 # Keep it like this too.
 networks:
   default:
-  traefik_default:
-    external: true
+    name: traefik_default
 
 
 # This dastically improve performance
