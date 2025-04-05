@@ -4,7 +4,7 @@ services:
   car-price-prediction:
     # This is for executing main.py inside the container
     # docker compose -f docker-compose.yaml up
-    command: python3 main.py
+    # command: python3 main.py
     tty: true
 
     # The image I upload to my docker hub
