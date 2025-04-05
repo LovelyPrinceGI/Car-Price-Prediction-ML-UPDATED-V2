@@ -5,7 +5,7 @@ services:
     # This is for executing main.py inside the container
     # docker compose -f docker-compose.yaml up
     # command: python3 main.py
-    tty: true
+    # tty: true
 
     # The image I upload to my docker hub
     image: lovelyprince/ait-ml-fastapi:2025_a3_1.0

@@ -27,12 +27,17 @@ jobs:
           APP_MODEL_NAME: ${{ secrets.APP_MODEL_NAME }}
       - name: Compose up
         run: docker compose up -d
+
+      # Debug
       - name: Show container logs (FastAPI debug)
         run: docker compose logs car-price-prediction || true
+      - name: Check if pytest exists
+        run: docker compose exec car-price-prediction which pytest
+      
       
       # This is new
       # only run test on test_model_staging.py
       - name: Testing
-        run: docker compose exec -it car-price-prediction pytest test_model_staging.py -v
+        run: docker compose exec car-price-prediction bash -c "pytest test_model_staging.py -v"
       - name: Transition to production
         run: docker compose exec -it car-price-prediction python transition.py
