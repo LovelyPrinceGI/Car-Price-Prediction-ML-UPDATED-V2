@@ -35,6 +35,10 @@ jobs:
       - name: Build the Docker image
         run: docker compose -f app/docker-compose.yml build
 
+      # 🆕 Add this to confirm network exists
+      - name: List Docker networks
+        run: docker network ls
+
       - name: Compose up
         run: docker compose -f app/docker-compose.yml up -d
 
