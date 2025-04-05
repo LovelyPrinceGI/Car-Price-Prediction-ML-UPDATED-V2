@@ -23,7 +23,7 @@ RUN pip3 install fastapi[testing]
 RUN pip3 install pytest
 RUN pip3 install pytest-depends
 
-COPY . /root/code/app
+COPY . /root/code
 
 
 
