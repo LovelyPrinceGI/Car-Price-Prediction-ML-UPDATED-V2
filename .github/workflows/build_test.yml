@@ -91,80 +91,66 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
 
-  deploy:
-      environment: Production
-      needs: build-test
-      runs-on: ubuntu-latest
-      steps:
-        - name: SSH Remote Commands
-          uses: appleboy/ssh-action@v1.0.0
-          with:
-            host: ml2025
-            # port: 2222
-            username: st124876
-            key: -----BEGIN OPENSSH PRIVATE KEY-----
-                b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABBhAmrtBv
-                t/kEUL+bAIMFzDAAAAGAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIJNe9nLbMUaB2zf5
-                U3msWlbmimER4UtabqCK+ZpLFX5rAAAAkIRSH5tmBejaOtVNLaW/gDjTOEWYvjNiJYoodL
-                thVDdPm13TkaDp/xylO4Ux0k9ayOTp7aW4FBVSrSb3v1xtBZ9UN1Uq+0YUEnckZ3vJXH6z
-                3FxSN7GIt45bD2sMuXgR5seBGlAVoboiNehPugLs0X8h94ZUWSWdhIjzsA0lzKHECsYwlI
-                rrnFYjH1L3SYrO+Q==
-                -----END OPENSSH PRIVATE KEY-----
-            passphrase: u)-.{=!3vY67LA\181)_2jz_012{?z1-
-            proxy_host: bazooka.cs.ait.ac.th
-            # proxy_port: 2222
-            proxy_username: st124876
-            proxy_key: -----BEGIN OPENSSH PRIVATE KEY-----
-                      b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABBhAmrtBv
-                      t/kEUL+bAIMFzDAAAAGAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIJNe9nLbMUaB2zf5
-                      U3msWlbmimER4UtabqCK+ZpLFX5rAAAAkIRSH5tmBejaOtVNLaW/gDjTOEWYvjNiJYoodL
-                      thVDdPm13TkaDp/xylO4Ux0k9ayOTp7aW4FBVSrSb3v1xtBZ9UN1Uq+0YUEnckZ3vJXH6z
-                      3FxSN7GIt45bD2sMuXgR5seBGlAVoboiNehPugLs0X8h94ZUWSWdhIjzsA0lzKHECsYwlI
-                      rrnFYjH1L3SYrO+Q==
-                      -----END OPENSSH PRIVATE KEY-----
-            proxy_passphrase: u)-.{=!3vY67LA\181)_2jz_012{?z1-
-            script: |
-              docker compose -f docker-compose.yaml down
-              docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
-              docker compose -f docker-compose.yaml up -d
+  # deploy:
+  #     environment: Production
+  #     needs: build-test
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #       - name: SSH Remote Commands
+  #         uses: appleboy/ssh-action@v1.0.0
+  #         with:
+  #           host: ml2025
+  #           # port: 2222
+  #           username: st124876
+  #           key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #           passphrase: ${{ secrets.SSH_PASSPHRASE }}
+  #           proxy_host: bazooka.cs.ait.ac.th
+  #           # proxy_port: 2222
+  #           proxy_username: st124876
+  #           proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #           proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
+  #           script: |
+  #             docker compose -f docker-compose.yaml down
+  #             docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
+  #             docker compose -f docker-compose.yaml up -d
 
               
-  # deploy:
-  #   environment: Production
-  #   needs: build-test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Set up SSH key and config
-  #       run: |
-  #         mkdir -p ~/.ssh
-  #         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/st124876
-  #         chmod 600 ~/.ssh/st124876
+  deploy:
+    environment: Production
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH key and config
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/st124876
+          chmod 600 ~/.ssh/st124876
 
-  #         cat << 'EOF' > ~/.ssh/config
-  #         Host bazooka
-  #           HostName bazooka.cs.ait.ac.th
-  #           User st124876
-  #           IdentityFile ~/.ssh/st124876
+          cat << 'EOF' > ~/.ssh/config
+          Host bazooka
+            HostName bazooka.cs.ait.ac.th
+            User st124876
+            IdentityFile ~/.ssh/st124876
 
-  #         Host ml2025
-  #           HostName ml.brain.cs.ait.ac.th
-  #           User st124876
-  #           IdentityFile ~/.ssh/st124876
-  #           ProxyJump bazooka
-  #           StrictHostKeyChecking no
-  #           UserKnownHostsFile /dev/null
-  #         EOF
-  #         chmod 600 ~/.ssh/config
+          Host ml2025
+            HostName ml.brain.cs.ait.ac.th
+            User st124876
+            IdentityFile ~/.ssh/st124876
+            ProxyJump bazooka
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+          EOF
+          chmod 600 ~/.ssh/config
 
-  #         # add bazooka to known hosts...
-  #         ssh-keyscan -p 22 -H bazooka.cs.ait.ac.th >> ~/.ssh/known_hosts 2>/dev/null || echo "Warning: Failed to scan bazooka host key"
-  #         chmod 600 ~/.ssh/known_hosts
+          # add bazooka to known hosts...
+          ssh-keyscan -p 22 -H bazooka.cs.ait.ac.th >> ~/.ssh/known_hosts 2>/dev/null || echo "Warning: Failed to scan bazooka host key"
+          chmod 600 ~/.ssh/known_hosts
 
-      # - name: SSH Remote Deployment
-      #   run: |
-      #     ssh ml2025 << 'EOF'
-      #     docker compose -f docker-compose.yaml down || true
-      #     docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force || true
-      #     docker network create traefik_default || true
-      #     docker compose -f docker-compose.yaml up -d
-      #     EOF
+      - name: SSH Remote Deployment
+        run: |
+          ssh ml2025 << 'EOF'
+          docker compose -f docker-compose.yaml down || true
+          docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force || true
+          docker network create traefik_default || true
+          docker compose -f docker-compose.yaml up -d
+          EOF
