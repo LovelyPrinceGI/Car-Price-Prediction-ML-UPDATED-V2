@@ -70,7 +70,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: LovelyPrince/ait-ml-fastapi:2025_a3_1.0
+          images: LovelyPrince/ait-ml-fastapi
           # tag-separator: "-"
           # tags: |
           #   type=schedule
@@ -89,7 +89,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}, LovelyPrince/ait-ml-fastapi:2025_a3_1.0
+          tags: ${{ steps.meta.outputs.tags }}
 
   deploy:
       environment: Production
