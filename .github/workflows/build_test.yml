@@ -103,7 +103,7 @@ jobs:
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             passphrase: ${{ secrets.SSH_PASSPHRASE }}
-            proxy_host: ${{ vars.PROXY_HOST }}
+            proxy_host: bazooka.cs.ait.ac.th
             proxy_username: ${{ secrets.USERNAME }}
             proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
             proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
