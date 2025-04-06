@@ -4,7 +4,7 @@ services:
   car-price-prediction:
     # This is for executing main.py inside the container
     # docker compose -f docker-compose.yaml up
-    command: python3 main.py
+    # command: python3 main.py
     ports:
       - "80:8000"  # maps container:host (this makes app accessible from outside!)
     # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
@@ -48,7 +48,7 @@ services:
     working_dir: /app
 
 networks:
-  traefik:
+  traefik_default:
     external: true
 
 # # Keep it like this too.
