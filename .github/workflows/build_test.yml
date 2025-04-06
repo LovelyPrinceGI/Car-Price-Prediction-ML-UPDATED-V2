@@ -33,6 +33,9 @@ jobs:
           MLFLOW_TRACKING_URI: ${{ vars.MLFLOW_TRACKING_URI }}
           APP_MODEL_NAME: ${{ secrets.APP_MODEL_NAME }}
 
+      - name: Remove existing traefik_default network if exists
+        run: docker network rm traefik_default || true
+        
       - name: Create Docker Network
         run: docker network create traefik_default || true
 
