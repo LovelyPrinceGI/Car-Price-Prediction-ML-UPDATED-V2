@@ -99,11 +99,13 @@ jobs:
         - name: SSH Remote Commands
           uses: appleboy/ssh-action@v1.0.0
           with:
-            host: ${{ vars.SSH_HOST }}
+            host: ml2025
+            port: 2222
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             passphrase: ${{ secrets.SSH_PASSPHRASE }}
-            proxy_host: ${{ secrets.PROXY_HOST }}
+            proxy_host: bazooka.cs.ait.ac.th
+            proxy_port: 2222
             proxy_username: ${{ secrets.USERNAME }}
             proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
             proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
