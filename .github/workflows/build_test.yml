@@ -11,8 +11,8 @@ on:
     - master
     paths:
     - '**'
-    tags:
-      - 'v*'
+    # tags:
+    #   - 'v*'
 
 jobs:
   # Job name
@@ -74,8 +74,8 @@ jobs:
           tag-separator: "-"
           tags: |
             type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
+            # type=ref,event=branch
+            # type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
