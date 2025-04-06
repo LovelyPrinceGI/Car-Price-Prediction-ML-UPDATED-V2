@@ -102,13 +102,27 @@ jobs:
             host: ml2025
             # port: 2222
             username: st124876
-            key: "${{ secrets.SSH_PRIVATE_KEY }}"
-            passphrase: "${{ secrets.SSH_PASSPHRASE }}"
+            key: -----BEGIN OPENSSH PRIVATE KEY-----
+                b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABBhAmrtBv
+                t/kEUL+bAIMFzDAAAAGAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIJNe9nLbMUaB2zf5
+                U3msWlbmimER4UtabqCK+ZpLFX5rAAAAkIRSH5tmBejaOtVNLaW/gDjTOEWYvjNiJYoodL
+                thVDdPm13TkaDp/xylO4Ux0k9ayOTp7aW4FBVSrSb3v1xtBZ9UN1Uq+0YUEnckZ3vJXH6z
+                3FxSN7GIt45bD2sMuXgR5seBGlAVoboiNehPugLs0X8h94ZUWSWdhIjzsA0lzKHECsYwlI
+                rrnFYjH1L3SYrO+Q==
+                -----END OPENSSH PRIVATE KEY-----
+            passphrase: u)-.{=!3vY67LA\181)_2jz_012{?z1-
             proxy_host: bazooka.cs.ait.ac.th
             # proxy_port: 2222
             proxy_username: st124876
-            proxy_key: "${{ secrets.SSH_PRIVATE_KEY }}"
-            proxy_passphrase: "${{ secrets.SSH_PASSPHRASE }}"
+            proxy_key: -----BEGIN OPENSSH PRIVATE KEY-----
+                      b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABBhAmrtBv
+                      t/kEUL+bAIMFzDAAAAGAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIJNe9nLbMUaB2zf5
+                      U3msWlbmimER4UtabqCK+ZpLFX5rAAAAkIRSH5tmBejaOtVNLaW/gDjTOEWYvjNiJYoodL
+                      thVDdPm13TkaDp/xylO4Ux0k9ayOTp7aW4FBVSrSb3v1xtBZ9UN1Uq+0YUEnckZ3vJXH6z
+                      3FxSN7GIt45bD2sMuXgR5seBGlAVoboiNehPugLs0X8h94ZUWSWdhIjzsA0lzKHECsYwlI
+                      rrnFYjH1L3SYrO+Q==
+                      -----END OPENSSH PRIVATE KEY-----
+            proxy_passphrase: u)-.{=!3vY67LA\181)_2jz_012{?z1-
             script: |
               docker compose -f docker-compose.yaml down
               docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
