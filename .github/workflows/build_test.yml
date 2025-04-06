@@ -6,10 +6,13 @@ on:
   push:
     branches:
     - master
+  pull_request:
+    branches:
+    - master
     paths:
     - 'app/**'
-    tags:
-      - 'v*'
+    # tags:
+    #   - 'v*'
 
 jobs:
   # Job name
