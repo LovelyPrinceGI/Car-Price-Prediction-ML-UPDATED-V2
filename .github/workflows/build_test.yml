@@ -41,6 +41,9 @@ jobs:
         run: docker network ls
 
       - name: Compose up
+        # run: docker compose -f app/docker-compose.yml up -d
+        env:
+          APP_MODEL_NAME: ${{ secrets.APP_MODEL_NAME }}
         run: docker compose -f app/docker-compose.yml up -d
 
       - name: Wait for container

@@ -22,7 +22,7 @@ def load_mlflow(stage: str):
     path = os.path.join(cache_path, model_name)
     if(os.path.exists( path ) == False):
         # This will keep load the model again and again
-        model = mlflow.sklearn.load_model(model_uri=f"models:/model_name/{stage}")
+        model = mlflow.sklearn.load_model(model_uri=f"models:/{model_name}/{stage}")
         save(filename=path, obj=model)
 
     model = load(path)
