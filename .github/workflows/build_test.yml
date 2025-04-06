@@ -109,5 +109,5 @@ jobs:
             proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
             script: |
               tag=${{ github.ref_name }} docker compose -f docker-compose.yaml down
-              tag=${{ github.ref_name }} docker image rm lovelyprince/ait-ml-fastapi --force
+              tag=${{ github.ref_name }} docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
               tag=${{ github.ref_name }} docker compose -f docker-compose.yaml up -d
