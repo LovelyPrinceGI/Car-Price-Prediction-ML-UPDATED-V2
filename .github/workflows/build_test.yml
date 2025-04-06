@@ -103,12 +103,12 @@ jobs:
             port: 2222
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.SSH_PRIVATE_KEY }}
-            passphrase: ${{ secrets.SSH_PASSPHRASE }}
+            # passphrase: ${{ secrets.SSH_PASSPHRASE }}
             proxy_host: bazooka.cs.ait.ac.th
             proxy_port: 2222
             proxy_username: ${{ secrets.USERNAME }}
             proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
-            proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
+            # proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
             script: |
               docker compose -f docker-compose.yaml down
               docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
