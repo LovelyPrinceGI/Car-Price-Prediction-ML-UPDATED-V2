@@ -11,8 +11,8 @@ on:
     - master
     paths:
     - '**'
-    # tags:
-    #   - 'v*'
+    tags:
+      - 'v*'
 
 jobs:
   # Job name
