@@ -9,10 +9,29 @@ def load(filename:str) -> object:
         b = pickle.load(handle)
     return b
 
+# import mlflow
+# import os
+
 import mlflow
-import os
+mlflow.set_tracking_uri("https://admin:password@mlflow.ml.brain.cs.ait.ac.th/")
+from mlflow.tracking import MlflowClient
+
+model_info = MlflowClient().get_registered_model("st124876-a3-model")
 
 model_name = os.environ['APP_MODEL_NAME']
+
+def register_model_production():
+    client = MlflowClient()
+    for model in client.get_registered_model('st124876-a3-model').latest_versions:  # type:ignore
+        # Find model in staging; adjust the stage string if needed.
+        if model.current_stage.lower() == 'Staging':
+            version = model.version
+            client.transition_model_version_stage(
+                name=model_name, version=version, stage='Production', archive_existing_versions=True
+            )
+
+
+
 # def load_mlflow(stage: str):
 #     cache_path = os.path.join("models", stage)
 #     if(os.path.exists(cache_path) == False):
@@ -40,13 +59,17 @@ model_name = os.environ['APP_MODEL_NAME']
 #     model = mlflow.pyfunc.load_model(model_uri)
 #     return model
 
-def register_model_production():
-    from mlflow.client import MlflowClient
-    client = MlflowClient()
-    for model in client.get_registered_model('st124876-a3-model').latest_versions: # type:ignore
-        # Find model in staging
-        if(model.current_stage == 'staging'):
-            version = model.version
-            client.transition_model_version_stage(
-                name=model_name, version=version, stage='Production', archive_existing_versions=True
-            )
+
+# model_name = os.environ['APP_MODEL_NAME']
+
+# def register_model_production():
+#     from mlflow.client import MlflowClient
+#     client = MlflowClient()
+#     for model in client.get_registered_model('st124876-a3-model').latest_versions: # type:ignore
+#         # Find model in staging
+#         if(model.current_stage == 'Staging'):
+#             version = model.version
+#             client.transition_model_version_stage(
+#                 name=model_name, version=version, stage='Production', archive_existing_versions=True
+#             )
+
