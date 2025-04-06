@@ -146,7 +146,6 @@ jobs:
           ssh-keyscan -p 22 -H bazooka.cs.ait.ac.th >> ~/.ssh/known_hosts 2>/dev/null || echo "Warning: Failed to scan bazooka host key"
           chmod 600 ~/.ssh/known_hosts
 
-
       - name: SSH Remote Deployment
         run: |
           ssh -o StrictHostKeyChecking=no ml2025 "
