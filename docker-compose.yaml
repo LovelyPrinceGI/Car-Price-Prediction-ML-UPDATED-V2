@@ -17,7 +17,7 @@ services:
     # Set environment variables
     environment:
       - HOST=0.0.0.0
-      - PORT=80
+      - PORT=8000
       - APP_MODEL_NAME=st124876-a3-model
       - ML_FLOW_TRACKING_URI=https://mlflow.ml.brain.cs.ait.ac.th/
     # This is important for asking Traefik to use your container.
