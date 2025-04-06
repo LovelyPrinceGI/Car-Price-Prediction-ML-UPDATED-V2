@@ -125,7 +125,7 @@ def dummy_data():
     y_pred = np.array([0, 1, 2, 0, 0, 2, 2, 2, 1, 0])
     return y_true, y_pred
 
-@pytest.mark.depends(on=['dummy_data']) 
+@pytest.mark.depends(on=['test_load_model']) 
 def test_evaluate_metrics(dummy_data):
     model = MyLogisticRegression(k=3, n=5)
     # model = load_mlflow(stage=stage)
