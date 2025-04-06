@@ -144,3 +144,12 @@ jobs:
           # add bazooka to known hosts...
           ssh-keyscan -p 22 -H bazooka.cs.ait.ac.th >> ~/.ssh/known_hosts 2>/dev/null || echo "Warning: Failed to scan bazooka host key"
           chmod 600 ~/.ssh/known_hosts
+
+      - name: SSH Remote Deployment
+        run: |
+          ssh ml2025 << 'EOF'
+          docker compose -f docker-compose.yaml down || true
+          docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force || true
+          docker network create traefik_default || true
+          docker compose -f docker-compose.yaml up -d
+          EOF
