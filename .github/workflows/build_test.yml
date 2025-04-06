@@ -71,6 +71,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: LovelyPrince/ait-ml-fastapi:2025_a3_1.0
+          tag-separator: "-"
           tags: |
             type=schedule
             type=ref,event=branch
