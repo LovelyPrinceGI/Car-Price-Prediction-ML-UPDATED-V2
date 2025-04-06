@@ -11,8 +11,8 @@ on:
     - master
     paths:
     - '**'
-    # tags:
-    #   - 'v*'
+    tags:
+      - 'v*'
 
 jobs:
   # Job name
@@ -71,16 +71,18 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: LovelyPrince/ait-ml-fastapi:2025_a3_1.0
-          tag-separator: "-"
+          # tag-separator: "-"
+          # tags: |
+          #   type=schedule
+          #   type=ref,event=branch
+          #   type=ref,event=pr
+          #   type=semver,pattern={{version}}
+          #   type=semver,pattern={{major}}.{{minor}}
+          #   type=semver,pattern={{major}}
+          #   type=semver,pattern=latest
+          #   type=sha
           tags: |
-            type=schedule
-            # type=ref,event=branch
-            # type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=semver,pattern=latest
-            type=sha
+            type-semver, pattern={{raw}}
 
       - name: Build and push
         uses: docker/build-push-action@v5
