@@ -148,9 +148,18 @@ jobs:
 
       - name: SSH Remote Deployment
         run: |
-          ssh ml2025 << 'EOF'
-          docker compose -f docker-compose.yaml down || true
-          docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force || true
-          docker network create traefik_default || true
-          docker compose -f docker-compose.yaml up -d
-          EOF
+          ssh -o StrictHostKeyChecking=no ml2025 "
+            echo 'Shutting down previous containers...'
+            docker compose -f docker-compose.yaml down || true
+      
+            echo 'Removing old image...'
+            docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force || true
+      
+            echo 'Creating network if not exists...'
+            docker network create traefik_default || true
+      
+            echo 'Starting new container...'
+            docker compose -f docker-compose.yaml up -d
+          "
+        
+        
