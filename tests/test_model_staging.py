@@ -18,9 +18,9 @@ from my_model.my_model import MyLogisticRegression  # <-- แก้ตรงน�
 # mlflow_model = mlflow.pyfunc.load_model(model_uri)  # อย่าใช้ชื่อว่า model ซ้ำ!
 
 
-stage = "staging"
 
-def load_mlflow(stage: str):
+
+def load_mlflow(stage="Staging"):
     # Rely on the environment variable set at runtime
     tracking_uri = os.environ.get("ML_FLOW_TRACKING_URI")
     if tracking_uri:
@@ -38,7 +38,7 @@ def test_load_model():
     model = load_mlflow(stage)
     assert model
 
-
+stage = "staging"
 # ========== Test for Your MyLogisticRegression Model ==========
 
 @pytest.mark.depends(on=['test_load_model']) 
