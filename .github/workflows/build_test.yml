@@ -99,7 +99,7 @@ jobs:
         - name: SSH Remote Commands
           uses: appleboy/ssh-action@v1.0.0
           with:
-            host: ml2025
+            host: ml.brain.cs.ait.ac.th
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             passphrase: ${{ secrets.SSH_PASSPHRASE }}
