@@ -37,7 +37,7 @@ def load_mlflow(stage=stage):
 # from utlis import load_mlflow
 
 def test_load_model():
-    model = load_mlflow(stage)
+    model = load_mlflow(stage=stage)
     assert model
 
 
