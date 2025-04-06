@@ -98,7 +98,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: SSH Remote Commands
-          uses: appleboy/ssh-action@v1.0.0
+          uses: appleboy/ssh-action@master
           with:
             host: ml.brain.cs.ait.ac.th
             username: ${{ secrets.USERNAME }}
