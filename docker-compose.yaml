@@ -16,7 +16,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=80
-      - APP_MODEL_NAME=${APP_MODEL_NAME}
+      - APP_MODEL_NAME=st124876-a3-model
     # This is important for asking Traefik to use your container.
     labels:
       # Allow Traefik to talk with your service
