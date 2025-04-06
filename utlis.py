@@ -28,17 +28,17 @@ model_name = os.environ['APP_MODEL_NAME']
 #     model = load(path)
 #     return model
 
-def load_mlflow(stage: str):
-    # Rely on the environment variable set at runtime
-    tracking_uri = os.environ.get("ML_FLOW_TRACKING_URI")
-    if tracking_uri:
-        mlflow.set_tracking_uri(tracking_uri)
-    else:
-        raise ValueError("ML_FLOW_TRACKING_URI is not set in the environment.")
-    # Construct the model URI, e.g., "models:/my-model/staging"
-    model_uri = f"models:/st124876-a3-model/{stage}"
-    model = mlflow.pyfunc.load_model(model_uri)
-    return model
+# def load_mlflow(stage: str):
+#     # Rely on the environment variable set at runtime
+#     tracking_uri = os.environ.get("ML_FLOW_TRACKING_URI")
+#     if tracking_uri:
+#         mlflow.set_tracking_uri(tracking_uri)
+#     else:
+#         raise ValueError("ML_FLOW_TRACKING_URI is not set in the environment.")
+#     # Construct the model URI, e.g., "models:/my-model/staging"
+#     model_uri = f"models:/st124876-a3-model/{stage}"
+#     model = mlflow.pyfunc.load_model(model_uri)
+#     return model
 
 def register_model_production():
     from mlflow.client import MlflowClient

@@ -20,19 +20,19 @@ from my_model.my_model import MyLogisticRegression  # <-- แก้ตรงน�
 
 stage = "staging"
 
-# def load_mlflow(stage: str):
-#     # Rely on the environment variable set at runtime
-#     tracking_uri = os.environ.get("ML_FLOW_TRACKING_URI")
-#     if tracking_uri:
-#         mlflow.set_tracking_uri(tracking_uri)
-#     else:
-#         raise ValueError("ML_FLOW_TRACKING_URI is not set in the environment.")
-#     # Construct the model URI, e.g., "models:/my-model/staging"
-#     model_uri = f"models:/st124876-a3-model/{stage}"
-#     model = mlflow.pyfunc.load_model(model_uri)
-#     return model
+def load_mlflow(stage: str):
+    # Rely on the environment variable set at runtime
+    tracking_uri = os.environ.get("ML_FLOW_TRACKING_URI")
+    if tracking_uri:
+        mlflow.set_tracking_uri(tracking_uri)
+    else:
+        raise ValueError("ML_FLOW_TRACKING_URI is not set in the environment.")
+    # Construct the model URI, e.g., "models:/my-model/staging"
+    model_uri = f"models:/st124876-a3-model/{stage}"
+    model = mlflow.pyfunc.load_model(model_uri)
+    return model
 
-from utlis import load_mlflow
+# from utlis import load_mlflow
 
 def test_load_model():
     model = load_mlflow(stage)
