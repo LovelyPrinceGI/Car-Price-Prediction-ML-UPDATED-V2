@@ -34,23 +34,31 @@ services:
       - traefik.http.routers.car-price-prediction.tls.certresolver=production
       - traefik.http.routers.car-price-prediction.entrypoints=websecure
     # Define networks
-    networks:
-      - default
-      - traefik_default
-    # Mount volumes
+    # networks:
+    #   - default
+    #   - traefik_default
+    # # Mount volumes
+    # volumes:
+    #   - ./:/root/code
+    #   - ./.vscode-server:/root/.vscode-server
+    expose:
+      - "8000"   # only expose to Traefik, not host
     volumes:
-      - ./:/root/code
-      - ./.vscode-server:/root/.vscode-server
+      - .:/app
+    working_dir: /app
 
-
-# Keep it like this too.
 networks:
-  traefik_default:
-    name: traefik_default
+  traefik:
     external: true
 
+# # Keep it like this too.
+# networks:
+#   traefik_default:
+#     name: traefik_default
+#     external: true
 
-# This dastically improve performance
-volumes:
-  vscode-server:
+
+# # This dastically improve performance
+# volumes:
+#   vscode-server:
 
