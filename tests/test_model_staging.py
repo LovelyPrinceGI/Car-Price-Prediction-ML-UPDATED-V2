@@ -12,17 +12,19 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 # ✅ import model class ของเราเอง (ชื่อไฟล์กับ class ต้องตรง!)
 from my_model.my_model import MyLogisticRegression  # <-- แก้ตรงนี้ตามจริง
 
-# # ✅ MLflow model แยกตัวแปรต่างหาก
-# mlflow.set_tracking_uri("https://admin:password@mlflow.ml.brain.cs.ait.ac.th")
-# model_uri = "models:/st124876-a3-model/4"
-# mlflow_model = mlflow.pyfunc.load_model(model_uri)  # อย่าใช้ชื่อว่า model ซ้ำ!
+# ✅ MLflow model แยกตัวแปรต่างหาก
+mlflow.set_tracking_uri("https://admin:password@mlflow.ml.brain.cs.ait.ac.th")
+model_uri = "models:/st124876-a3-model/4"
+mlflow_model = mlflow.pyfunc.load_model(model_uri)  # อย่าใช้ชื่อว่า model ซ้ำ!
 
 
 
+stage = "Staging"
 
-def load_mlflow(stage="Staging"):
+def load_mlflow(stage=stage):
     # Rely on the environment variable set at runtime
-    tracking_uri = os.environ.get("ML_FLOW_TRACKING_URI")
+    # tracking_uri = os.environ.get("ML_FLOW_TRACKING_URI")
+    tracking_uri = "https://admin:password@mlflow.ml.brain.cs.ait.ac.th/"
     if tracking_uri:
         mlflow.set_tracking_uri(tracking_uri)
     else:
@@ -38,13 +40,13 @@ def test_load_model():
     model = load_mlflow(stage)
     assert model
 
-stage = "staging"
+
 # ========== Test for Your MyLogisticRegression Model ==========
 
 @pytest.mark.depends(on=['test_load_model']) 
 def test_custom_model_accuracy():
     # model = MyLogisticRegression(k=4, n=5)
-    model = load_mlflow(stage)
+    model = load_mlflow(stage=stage)
     y_true = np.array([0, 1, 2, 3])
     y_pred = np.array([0, 1, 1, 3])
     accuracy = model.accuracy(y_true, y_pred)
@@ -55,7 +57,7 @@ def test_all_metrics_above_threshold():
     print("=== TEST: Evaluate All Custom Metrics ===")
 
     # model = MyLogisticRegression(n=7, k=3)
-    model = load_mlflow(stage)
+    model = load_mlflow(stage=stage)
     model.W = np.random.rand(7, 3)  # Random weights for testing
 
     # Dummy validation set
@@ -76,7 +78,7 @@ def test_all_metrics_above_threshold():
 @pytest.mark.depends(on=['test_load_model']) 
 def test_custom_model_training():
     # model = MyLogisticRegression(k=4, n=5, max_iter=10)
-    model = load_mlflow(stage)
+    model = load_mlflow(stage=stage)
     X_train = np.random.randn(100, 5)
     y_train = np.random.randint(0, 4, 100)
     X_val = np.random.randn(20, 5)
@@ -90,7 +92,7 @@ def test_custom_model_training():
 @pytest.mark.depends(on=['test_load_model']) 
 def test_custom_model_prediction():
     # model = MyLogisticRegression(k=4, n=5)
-    model = load_mlflow(stage)
+    model = load_mlflow(stage=stage)
     X_test = np.random.randn(10, 5)
     y_pred = model.predict(X_test)
     assert y_pred.shape == (10,), f"Expected shape (10,), but got {y_pred.shape}"
@@ -112,7 +114,7 @@ def test_mlflow_model_prediction():
 @pytest.mark.depends(on=['test_load_model']) 
 def test_model_coeff_shape():
     # model = MyLogisticRegression(k=4, n=5)
-    model = load_mlflow(stage)
+    model = load_mlflow(stage=stage)
     output = model.W
     assert output.shape == (5, 4), f"Expected shape (5, 4), but got {output.shape}"
 
@@ -126,7 +128,7 @@ def dummy_data():
 @pytest.mark.depends(on=['dummy_data']) 
 def test_evaluate_metrics(dummy_data):
     # model = MyLogisticRegression(k=3, n=5)
-    model = load_mlflow(stage)
+    model = load_mlflow(stage=stage)
     y_true, y_pred = dummy_data
     metrics = model.evaluate(y_true, y_pred)
     for key in [
@@ -139,7 +141,7 @@ def test_evaluate_metrics(dummy_data):
 @pytest.mark.depends(on=['test_load_model']) 
 def test_classification_report_shape(dummy_data):
     # model = MyLogisticRegression(k=3, n=5)
-    model = load_mlflow(stage)
+    model = load_mlflow(stage=stage)
     y_true, y_pred = dummy_data
     report = model.my_classification_report(y_true, y_pred)
     assert isinstance(report, pd.DataFrame)
