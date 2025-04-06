@@ -4,8 +4,8 @@ services:
   car-price-prediction:
     # This is for executing main.py inside the container
     # docker compose -f docker-compose.yaml up
-    # command: python3 main.py
-    command: uvicorn app.main:app 
+    command: python3 main.py
+    # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     # tty: true
 
     # The image I upload to my docker hub
