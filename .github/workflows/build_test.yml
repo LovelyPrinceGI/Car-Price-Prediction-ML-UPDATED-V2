@@ -81,8 +81,7 @@ jobs:
           #   type=semver,pattern={{major}}
           #   type=semver,pattern=latest
           #   type=sha
-          tags: |
-            type-semver, pattern={{raw}}
+          tags: type-semver, pattern={{raw}}
 
       - name: Build and push
         uses: docker/build-push-action@v5
