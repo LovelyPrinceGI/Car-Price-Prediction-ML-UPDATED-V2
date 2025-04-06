@@ -98,7 +98,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: SSH Remote Commands
-          uses: appleboy/ssh-action@master
+          uses: appleboy/ssh-action@v1.0.0
           with:
             host: ml.brain.cs.ait.ac.th
             username: ${{ secrets.USERNAME }}
@@ -110,5 +110,5 @@ jobs:
             proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
             script: |
               tag=${{ github.ref_name }} docker compose -f st124876/docker-compose.yaml down
-              tag=${{ github.ref_name }} docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
+            
               tag=${{ github.ref_name }} docker compose -f st124876/docker-compose.yaml up -d
