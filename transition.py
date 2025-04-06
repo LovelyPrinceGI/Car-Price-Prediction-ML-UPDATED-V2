@@ -1,0 +1,3 @@
+from utlis import register_model_production
+
+register_model_production()
