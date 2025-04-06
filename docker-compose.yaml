@@ -5,6 +5,7 @@ services:
     # This is for executing main.py inside the container
     # docker compose -f docker-compose.yaml up
     # command: python3 main.py
+    command: uvicorn app.main:app 
     # tty: true
 
     # The image I upload to my docker hub

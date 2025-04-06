@@ -29,6 +29,8 @@ jobs:
         run: docker compose up -d
 
       # Debu
+      - name: Show container files
+        run: docker compose exec car-price-prediction ls -R /root/code || true
       - name: Show FastAPI crash logs
         run: docker compose logs car-price-prediction || true
       - name: Try to run bash in container to explore
