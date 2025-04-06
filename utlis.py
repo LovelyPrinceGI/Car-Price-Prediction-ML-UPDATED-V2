@@ -19,7 +19,7 @@ from mlflow.tracking import MlflowClient
 
 model_info = MlflowClient().get_registered_model("st124876-a3-model")
 
-model_name = os.environ['st124876-a3-model']
+model_name = os.environ['APP_MODEL_NAME']
 
 def register_model_production():
     client = MlflowClient()
