@@ -91,7 +91,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
 
-          
   deploy:
       environment: Production
       needs: build-test
@@ -100,7 +99,7 @@ jobs:
         - name: SSH Remote Commands
           uses: appleboy/ssh-action@v1.0.0
           with:
-            host: ${{ vars.ML_FLOW_TRACKING_URI }}
+            host: ml2025
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             passphrase: ${{ secrets.SSH_PASSPHRASE }}
