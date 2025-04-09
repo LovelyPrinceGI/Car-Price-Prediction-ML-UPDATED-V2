@@ -25,14 +25,14 @@ services:
       # Allow Traefik to talk with your service
       - traefik.enable=true
       # Tell Traefik to use port 80
-      - traefik.http.services.car-price-prediction-st124876.loadbalancer.server.port=8000
+      - traefik.http.services.car-price-prediction.loadbalancer.server.port=8000
       # This configures your domain name. By default, your subdomain is <service_name>-<folder_name>
       # If you want to change the subdomain name, uncomment and modify the below configuration
-      - traefik.http.routers.car-price-prediction-st124876.rule=Host(`st124876.ml.brain.cs.ait.ac.th`)
+      - traefik.http.routers.car-price-prediction.rule=Host(`st124876.ml.brain.cs.ait.ac.th`)
       # Enable SSL
-      - traefik.http.routers.car-price-prediction-st124876.tls=true
-      - traefik.http.routers.car-price-prediction-st124876.tls.certresolver=production
-      - traefik.http.routers.car-price-prediction-st124876.entrypoints=websecure
+      - traefik.http.routers.car-price-prediction.tls=true
+      - traefik.http.routers.car-price-prediction.tls.certresolver=production
+      - traefik.http.routers.car-price-prediction.entrypoints=websecure
     # Define networks
     # networks:
     #   - default
@@ -50,6 +50,7 @@ services:
 networks:
   traefik_default:
     external: true
+
 
 # # Keep it like this too.
 # networks:
