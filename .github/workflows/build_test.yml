@@ -40,24 +40,24 @@ jobs:
         run: docker network create traefik_default || true
 
       - name: Build the Docker image
-        run: docker compose -f docker-compose_a3.yaml build
+        run: docker compose -f docker-compose.yaml build
 
       # 🆕 Add this to confirm network exists
       - name: List Docker networks
         run: docker network ls
 
       - name: Compose up
-        # run: docker compose -f docker-compose_a3.yaml up -d
+        # run: docker compose -f docker-compose.yaml up -d
         env:
           APP_MODEL_NAME: ${{ secrets.APP_MODEL_NAME }}
-        run: docker compose -f docker-compose_a3.yaml up -d
+        run: docker compose -f docker-compose.yaml up -d
 
       - name: Wait for container
         run: sleep 10
 
       - name: Run tests in container
         run: docker compose exec car-price-prediction bash -c "PYTHONPATH=. python3 -m pytest tests/test_model_staging.py -v"
-        # run: docker compose -f docker-compose_a3.yaml run --rm car-price-prediction pytest tests/test_app_callbacks_v2.py -v
+        # run: docker compose -f docker-compose.yaml run --rm car-price-prediction pytest tests/test_app_callbacks_v2.py -v
         # If test successfully, deploy it to dockerhub
 
       - name: Login to Docker Hub
