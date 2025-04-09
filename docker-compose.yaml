@@ -1,66 +1,28 @@
-# version: '3.9'
+version: '3.9'
 
 services:
   car-price-prediction:
-    # This is for executing main.py inside the container
-    # docker compose -f docker-compose.yaml up
+    image: lovelyprince/ait-ml-fastapi:2025_a3_1.0
     command: python3 main.py
     ports:
-      - "8181:80"  # maps container:host (this makes app accessible from outside!)
-    # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
-    # tty: true
-
-    # The image I upload to my docker hub
-    image: lovelyprince/ait-ml-fastapi:2025_a3_1.0
-    # For MAC M1 user
+      - "8181:80"
     platform: linux/x86_64
-
-    # Set environment variables
     environment:
       - HOST=0.0.0.0
       - PORT=80
-      - APP_MODEL_NAME=st124876-a3-model
-      - ML_FLOW_TRACKING_URI="https://mlflow.ml.brain.cs.ait.ac.th/"
-    # This is important for asking Traefik to use your container.
     labels:
-      # Allow Traefik to talk with your service
       - traefik.enable=true
-      # Tell Traefik to use port 80
-      - traefik.http.services.car-price-prediction-st124876.loadbalancer.server.port=8000
-      # This configures your domain name. By default, your subdomain is <service_name>-<folder_name>
-      # If you want to change the subdomain name, uncomment and modify the below configuration
       - traefik.http.routers.car-price-prediction-st124876.rule=Host(`st124876.ml.brain.cs.ait.ac.th`)
-      # Enable SSL
+      - traefik.http.routers.car-price-prediction-st124876.entrypoints=websecure
       - traefik.http.routers.car-price-prediction-st124876.tls=true
       - traefik.http.routers.car-price-prediction-st124876.tls.certresolver=production
-      - traefik.http.routers.car-price-prediction-st124876.entrypoints=websecure
-    # Define networks
-    # networks:
-    #   - default
-    #   - traefik_default
-    # # Mount volumes
-    # volumes:
-    #   - ./:/root/code
-    #   - ./.vscode-server:/root/.vscode-server
-    expose:
-      - "8000"   # only expose to Traefik, not host
-    volumes:
-      - .:/app
-    working_dir: /app
+      - traefik.http.routers.car-price-prediction-st124876.service=car-price-service
+      - traefik.http.services.car-price-service.loadbalancer.server.port=80
+    networks:
+      - default
+      - traefik_default
 
 networks:
+  default:
   traefik_default:
     external: true
-
-
-# # Keep it like this too.
-# networks:
-#   traefik_default:
-#     name: traefik_default
-#     external: true
-
-
-# # This dastically improve performance
-# volumes:
-#   vscode-server:
-
