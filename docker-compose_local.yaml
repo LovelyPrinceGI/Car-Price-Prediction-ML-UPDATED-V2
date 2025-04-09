@@ -35,7 +35,7 @@ services:
     #   - traefik_default
     # Mount volumes
     volumes:
-      - ./app:/root/code
+      - ./app:/root
       - ./.vscode-server:/root/.vscode-server
     # Expose necessary ports
     ports:
