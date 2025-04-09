@@ -14,6 +14,7 @@ services:
     image: lovelyprince/ait-ml-fastapi:2025_a3_1.0
     # For MAC M1 user
     platform: linux/x86_64
+    
     # Set environment variables
     environment:
       - HOST=0.0.0.0
