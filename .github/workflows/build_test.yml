@@ -91,75 +91,25 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
 
-  # deploy:
-  #     environment: Production
-  #     needs: build-test
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: SSH Remote Commands
-  #         uses: appleboy/ssh-action@v1.0.0
-  #         with:
-  #           host: ml2025
-  #           # port: 2222
-  #           username: st124876
-  #           key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-  #           proxy_host: bazooka.cs.ait.ac.th
-  #           # proxy_port: 2222
-  #           proxy_username: st124876
-  #           proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #           proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
-  #           script: |
-  #             docker compose -f docker-compose.yaml down
-  #             docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
-  #             docker compose -f docker-compose.yaml up -d
-
-              
   deploy:
-    environment: Production
-    needs: build-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up SSH key and config
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/st124876
-          chmod 600 ~/.ssh/st124876
-
-          cat << 'EOF' > ~/.ssh/config
-          Host bazooka
-            HostName bazooka.cs.ait.ac.th
-            User st124876
-            IdentityFile ~/.ssh/st124876
-
-          Host ml2025
-            HostName ml.brain.cs.ait.ac.th
-            User st124876
-            IdentityFile ~/.ssh/st124876
-            ProxyJump bazooka
-            StrictHostKeyChecking no
-            UserKnownHostsFile /dev/null
-          EOF
-          chmod 600 ~/.ssh/config
-
-          # add bazooka to known hosts...
-          ssh-keyscan -p 22 -H bazooka.cs.ait.ac.th >> ~/.ssh/known_hosts 2>/dev/null || echo "Warning: Failed to scan bazooka host key"
-          chmod 600 ~/.ssh/known_hosts
-
-      - name: SSH Remote Deployment
-        run: |
-          ssh -o StrictHostKeyChecking=no ml2025 "
-            echo 'Shutting down previous containers...'
-            docker compose -f docker-compose.yaml down || true
-      
-            echo 'Removing old image...'
-            docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force || true
-      
-            echo 'Creating network if not exists...'
-            docker network create traefik_default || true
-      
-            echo 'Starting new container...'
-            docker compose -f docker-compose.yaml up -d
-          "
-        
-        
+      environment: Production
+      needs: build-test
+      runs-on: ubuntu-latest
+      steps:
+        - name: SSH Remote Commands
+          uses: appleboy/ssh-action@v1.0.0
+          with:
+            host: ml.brain.cs.ait.ac.th
+            # port: 2222
+            username: st124876
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
+            passphrase: ${{ secrets.SSH_PASSPHRASE }}
+            proxy_host: bazooka.cs.ait.ac.th
+            # proxy_port: 2222
+            proxy_username: st124876
+            proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
+            proxy_passphrase: ${{ secrets.SSH_PASSPHRASE }}
+            script: |
+              docker compose -f docker-compose.yaml down
+              docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
+              docker compose -f docker-compose.yaml up -d
