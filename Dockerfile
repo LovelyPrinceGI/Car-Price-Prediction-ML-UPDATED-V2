@@ -1,6 +1,6 @@
 FROM python:3.11.4-bookworm
 
-WORKDIR /root/code
+WORKDIR /root
 
 RUN pip3 install fastapi 
 RUN pip3 install uvicorn
