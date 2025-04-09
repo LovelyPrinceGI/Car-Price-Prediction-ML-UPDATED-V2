@@ -12,7 +12,10 @@ services:
     # tty: true
 
     # The image I upload to my docker hub
-    image: lovelyprince/ait-ml-fastapi:2025_a3_1.0
+    # image: lovelyprince/ait-ml-fastapi:2025_a3_1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
     # For MAC M1 user
     platform: linux/x86_64
 
