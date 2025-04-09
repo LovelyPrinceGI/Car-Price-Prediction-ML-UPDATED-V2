@@ -4,7 +4,7 @@ services:
   car-price-prediction:
     # This is for executing main.py inside the container
     # docker compose -f docker-compose.yaml up
-    command: python3 main.py
+    # command: python3 main.py
     ports:
       - "8181:80"  # maps container:host (this makes app accessible from outside!)
     # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
@@ -20,20 +20,20 @@ services:
       - HOST=0.0.0.0
       - PORT=80
       - APP_MODEL_NAME=st124876-a3-model
-      - ML_FLOW_TRACKING_URI="https://mlflow.ml.brain.cs.ait.ac.th/"
+      # - ML_FLOW_TRACKING_URI="https://mlflow.ml.brain.cs.ait.ac.th/"
     # This is important for asking Traefik to use your container.
-    labels:
+    # labels:
       # Allow Traefik to talk with your service
-      - traefik.enable=true
+      # - traefik.enable=true
       # Tell Traefik to use port 80
-      - traefik.http.services.car-price-prediction-st124876.loadbalancer.server.port=8000
+      # - traefik.http.services.car-price-prediction-st124876.loadbalancer.server.port=8000
       # This configures your domain name. By default, your subdomain is <service_name>-<folder_name>
       # If you want to change the subdomain name, uncomment and modify the below configuration
-      - traefik.http.routers.car-price-prediction-st124876.rule=Host(`st124876.ml.brain.cs.ait.ac.th`)
+      # - traefik.http.routers.car-price-prediction-st124876.rule=Host(`st124876.ml.brain.cs.ait.ac.th`)
       # Enable SSL
-      - traefik.http.routers.car-price-prediction-st124876.tls=true
-      - traefik.http.routers.car-price-prediction-st124876.tls.certresolver=production
-      - traefik.http.routers.car-price-prediction-st124876.entrypoints=websecure
+      # - traefik.http.routers.car-price-prediction-st124876.tls=true
+      # - traefik.http.routers.car-price-prediction-st124876.tls.certresolver=production
+      # - traefik.http.routers.car-price-prediction-st124876.entrypoints=websecure
     # Define networks
     # networks:
     #   - default
@@ -47,9 +47,9 @@ services:
     volumes:
       - .:/root
 
-networks:
-  traefik_default:
-    external: true
+# networks:
+#   traefik_default:
+#     external: true
 
 
 # # Keep it like this too.
