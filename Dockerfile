@@ -18,6 +18,7 @@ RUN pip3 install python-multipart
 RUN pip3 install mlflow 
 
 
+
 # Testing Modules
 RUN pip3 install fastapi[testing]
 RUN pip3 install pytest
