@@ -49,4 +49,4 @@ jobs:
         # run: docker compose exec car-price-prediction bash -c "PYTHONPATH=. python3 -m pytest tests/test_model_staging.py -v"
         # run: docker compose exec car-price-prediction bash -c "PYTHONPATH=. python3 -m pytest tests/test_app_callbacks_v2.py -v"
       - name: Transition to production
-        run: docker compose exec -it car-price-prediction python transition.py
+        run: docker compose exec -it car-price-prediction python3 -m /root/transition.py
