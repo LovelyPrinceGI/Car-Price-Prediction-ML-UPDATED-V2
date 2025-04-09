@@ -5,8 +5,8 @@ services:
     # This is for executing main.py inside the container
     # docker compose -f docker-compose.yaml up
     command: python3 main.py
-    ports:
-      - "80:8000"  # maps container:host (this makes app accessible from outside!)
+    # ports:
+    #   - "80:8000"  # maps container:host (this makes app accessible from outside!)
     # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     # tty: true
 
@@ -17,22 +17,22 @@ services:
     # Set environment variables
     environment:
       - HOST=0.0.0.0
-      - PORT=8000
+      - PORT=80
       - APP_MODEL_NAME=st124876-a3-model
-      - ML_FLOW_TRACKING_URI=https://mlflow.ml.brain.cs.ait.ac.th/
+      - ML_FLOW_TRACKING_URI="https://mlflow.ml.brain.cs.ait.ac.th/"
     # This is important for asking Traefik to use your container.
     labels:
       # Allow Traefik to talk with your service
       - traefik.enable=true
       # Tell Traefik to use port 80
-      - traefik.http.services.car-price-prediction.loadbalancer.server.port=8000
+      - traefik.http.services.car-price-prediction-st124876.loadbalancer.server.port=8000
       # This configures your domain name. By default, your subdomain is <service_name>-<folder_name>
       # If you want to change the subdomain name, uncomment and modify the below configuration
-      - traefik.http.routers.car-price-prediction.rule=Host(`st124876.ml.brain.cs.ait.ac.th`)
+      - traefik.http.routers.car-price-prediction-st124876.rule=Host(`st124876.ml.brain.cs.ait.ac.th`)
       # Enable SSL
-      - traefik.http.routers.car-price-prediction.tls=true
-      - traefik.http.routers.car-price-prediction.tls.certresolver=production
-      - traefik.http.routers.car-price-prediction.entrypoints=websecure
+      - traefik.http.routers.car-price-prediction-st124876.tls=true
+      - traefik.http.routers.car-price-prediction-st124876.tls.certresolver=production
+      - traefik.http.routers.car-price-prediction-st124876.entrypoints=websecure
     # Define networks
     # networks:
     #   - default

@@ -112,6 +112,6 @@ jobs:
             
             script: |
               cd st124876
-              docker compose -f docker-compose_a3.yaml down
+              docker compose -f docker-compose.yaml down
               docker image rm lovelyprince/ait-ml-fastapi:2025_a3_1.0 --force
-              docker compose -f docker-compose_a3.yaml up -d
+              docker compose -f docker-compose.yaml up -d
