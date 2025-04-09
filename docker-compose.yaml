@@ -45,7 +45,7 @@ services:
     expose:
       - "8000"   # only expose to Traefik, not host
     volumes:
-      - .:/app
+      - .:/root
 
 networks:
   traefik_default:
