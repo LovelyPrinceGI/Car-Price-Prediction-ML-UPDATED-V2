@@ -5,8 +5,8 @@ services:
     # This is for executing main.py inside the container
     # docker compose -f docker-compose.yaml up
     command: python3 main.py
-    # ports:
-    #   - "80:8000"  # maps container:host (this makes app accessible from outside!)
+    ports:
+      - "8181:80"  # maps container:host (this makes app accessible from outside!)
     # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     # tty: true
 
@@ -14,7 +14,7 @@ services:
     image: lovelyprince/ait-ml-fastapi:2025_a3_1.0
     # For MAC M1 user
     platform: linux/x86_64
-    
+
     # Set environment variables
     environment:
       - HOST=0.0.0.0
