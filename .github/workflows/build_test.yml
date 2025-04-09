@@ -56,7 +56,8 @@ jobs:
       #   run: sleep 10
 
       - name: Run tests in container
-        run: docker compose exec car-price-prediction bash -c "PYTHONPATH=. python3 -m pytest tests/test_model_staging.py -v"
+        run: docker compose exec -it car-price-prediction python3 -m pytest tests/test_model_staging.py
+        # run: docker compose exec car-price-prediction bash -c "PYTHONPATH=. python3 -m pytest tests/test_model_staging.py -v"
         # run: docker compose -f docker-compose.yaml run --rm car-price-prediction pytest tests/test_app_callbacks_v2.py -v
         # If test successfully, deploy it to dockerhub
 
