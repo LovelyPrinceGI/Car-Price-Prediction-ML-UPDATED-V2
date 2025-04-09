@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append('/root')
+
 print("=== LOADING TEST FILE ===")
 # To run: ~/code# PYTHONPATH=. pytest tests/test_app_callbacks_v2.py -v
 import pytest
