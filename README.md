@@ -85,4 +85,4 @@ Auto-deploys upon passing unit tests
 - Akraradet Sinsamersuk
 
 ## **Example of predicting website UI**
-![alt text](image.png)
+![alt text](image-1.png)
