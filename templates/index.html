@@ -52,7 +52,8 @@
         </form>
 
         {% if predicted_category %}
-            <h3>🔮 Predicted Price Category: {{ predicted_category }}</h3>
+            <!-- <h3>🔮 Predicted Price Category: {{ predicted_category }}</h3> -->
+            <p><strong>🔮 Predicted Price Category: [{{ predicted_category }}] → {{ category_range }}</strong></p>
             <p><strong>Max Power:</strong> {{ vehicle_specs.max_power }}</p>
             <p><strong>Year:</strong> {{ vehicle_specs.year }}</p>
             <p><strong>Km Driven:</strong> {{ vehicle_specs.km_driven }}</p>
