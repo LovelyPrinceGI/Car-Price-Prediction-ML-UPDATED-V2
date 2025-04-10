@@ -83,3 +83,6 @@ Auto-deploys upon passing unit tests
 ## **🤝 Contributors**
 - Chaklam Silpasuwanchai
 - Akraradet Sinsamersuk
+
+## **Example of predicting website UI**
+![alt text](image.png)
