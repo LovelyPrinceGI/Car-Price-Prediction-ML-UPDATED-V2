@@ -108,9 +108,17 @@ def predict_car_price_old(
             "Brand Region": brand_region
         }
 
+        category_range_map = {
+            0: "Below ฿260,000",
+            1: "฿260,000 - ฿450,000",
+            2: "฿450,000 - ฿680,000",
+            3: "More than ฿680,000"
+        }
+
         return templates.TemplateResponse("index.html", {
             "request": request,
             "predicted_category": predicted_category,
+            "category_range": category_range_map.get(predicted_category, "Unknown"),
             "vehicle_specs": {
                 "max_power": max_power,
                 "year": year,
