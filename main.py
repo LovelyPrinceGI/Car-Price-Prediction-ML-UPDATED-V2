@@ -98,6 +98,7 @@ def predict_car_price_old(
 
         # Make a prediction
         predicted_category = model.predict(final_features)
+        predicted_category = int(predicted_category[0])
         # predicted_category = np.exp(predicted_category)
 
         vehicle_specs = {
